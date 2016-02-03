@@ -1,14 +1,10 @@
 Rails.application.routes.draw do
 
-<<<<<<< HEAD
   resources :users
 
-
-=======
   resources :sessions, only: [:new, :create, :destroy]
 
   resources :owners, only: [:new, :create, :edit, :show, :update]
->>>>>>> GenerateOwnerControllerRoutes
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
