@@ -7,17 +7,21 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to users_path, notice:'Welcome to Sit Yourself Down, Please'
+      redirect_to user_path(@user.id), notice:'Welcome to Sit Yourself Down, Please'
     else
       render 'new'
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
   def update
     @user = User.find(params[:id])
 
-    if @user.update_attirbutes(user_params)
-      redirect_to users_path(@user)
+    if @user.update_attributes(user_params)
+      redirect_to user_path(@user.id)
     else
       render :edit
     end
@@ -32,7 +36,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
-
 
 
   private
