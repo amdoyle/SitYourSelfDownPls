@@ -21,7 +21,7 @@
 <p>
   <%= @restaurant.capacity %>
 </p>
-
+<% if current_user %>
 
 <%= form_for([@restaurant, @reservation]) do |f| %>
   <% if @reservation.errors.any? %>
@@ -53,6 +53,9 @@
   <div class = "actions">
     <%= f.submit %>
   </div>
+<% end %>
+<% else %>
+<p>Only users can add reservations.</p>
 <% end %>
 
 <p> <%= link_to "Edit Your Restaurant Listing", edit_restaurant_path %> |
