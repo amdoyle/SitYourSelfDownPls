@@ -22,6 +22,7 @@
   <%= @restaurant.capacity %>
 </p>
 
+<<<<<<< HEAD
 <%= form_for([@restaurant, @reservation]) do |f| %>
   <% if @reservation.errors.any? %>
     <div id="error_explanation">
@@ -55,4 +56,8 @@
 <% end %>
 
 <%= link_to "Edit Your Restaurant Listing", edit_restaurant_path %>
+=======
+<p> <%= link_to "Edit Your Restaurant Listing", edit_restaurant_path %> |
+>>>>>>> origin
 <%= link_to "Back to Restaurant Listings", restaurants_path %>
+</p>
