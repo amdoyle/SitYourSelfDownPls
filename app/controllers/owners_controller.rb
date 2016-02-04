@@ -29,8 +29,6 @@ class OwnersController < ApplicationController
     else
       redirect_to edit_owner_path(@owner.id), notice: "Failed to save changes"
     end
-
-
   end
 
   def destroy
