@@ -1,12 +1,31 @@
 class ReservationsController < ApplicationController
+  before_action :load_restaurant
+
   def new
-    
+    @reservation = Reservation.new
   end
 
   def create
+    @reservation = @restaurant.reservations.build(reservation_params)
+    if @reservation.save
+      redirect_to restaurant_path(@reservation.restaurant_id), notice: "Reservation has been created!"
+    else
+      render "new"
+    end
   end
 
   def show
+    @reservation = Reservation.find(params[:id])
+  end
+
+  # Reservations nested under Restaurant, therefore using :restaurant_id
+  private
+  def load_restaurant
+    @restaurant = Restaurant.find(params[:restaurant_id])
+  end
+
+  def reservation_params
+    params.require(:reservation).permit(:name, :number, :time)
   end
 
 end
