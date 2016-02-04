@@ -2,7 +2,6 @@ class RestaurantsController < ApplicationController
 
   def index
     @restaurants = Restaurant.all
-
   end
 
   def new
@@ -40,7 +39,6 @@ class RestaurantsController < ApplicationController
 
   def destroy
     @restaurant = Restaurant.find(params[:id])
-
     @restaurant.destroy
     redirect_to owner_path(@owner.id)
   end
