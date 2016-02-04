@@ -6,6 +6,7 @@ class OwnersController < ApplicationController
 
   def create
     @owner = Owner.new(owner_params)
+
     if @owner.save
       redirect_to owner_path(@owner.id), notice: "Signed up as owner!"
     else
@@ -23,12 +24,18 @@ class OwnersController < ApplicationController
 
   def update
     @owner = Owner.find(params[:id])
+    if @owner.authenticate(params[:password])
+      if @owner.update_attributes(owner_params)
+        redirect_to owner_path(@owner.id)
+      else
+        redirect_to edit_owner_path(@owner.id), notice: "Failed to save changes"
+      end
 
-    if @owner.update_attributes(owner_params)
-      redirect_to owner_path(@owner.id)
     else
-      render :edit
+      redirect_to edit_owner_path(@owner.id), notice: "Wrong password"
     end
+
+
   end
 
   def destroy
