@@ -1,10 +1,6 @@
 <h1>Edit Owner</h1>
 <% if current_owner && session[:owner_id].to_i == params[:id].to_i %>
   <%= form_for(@owner) do |f| %>
-    <div class = "field">
-      <%= label_tag :password, "Re-enter your password: " %>
-      <%= f.password_field :password %>
-    </div>
 
     <div class = "field">
       <%= f.label :username %>
