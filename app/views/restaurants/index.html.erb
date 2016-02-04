@@ -1,0 +1,18 @@
+<h1>Resturant List for <%= @restaurants.length %></h1>
+
+<% @restaurants.each do |restaurant| %>
+  <div class="restaurant">
+    <p>
+      <%= link_to restaurant.name, "restaurants/#{restaurant.id}" %>
+    </p>
+    <p>
+      <%= restaurant.address %>
+    </p>
+    <p>
+      <%= restaurant.phone_number %>
+    </p>
+    <p>
+      <%= restaurant.description %>
+    </p>
+  </div>
+<% end %>

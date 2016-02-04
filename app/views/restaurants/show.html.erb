@@ -1,0 +1,26 @@
+<h1>Restaurant Homepage</h1>
+
+<p>
+  <%= @restaurant.name %>
+</p>
+<p>
+  <%= @restaurant.address %>
+</p>
+<p>
+  <%= @restaurant.phone_number %>
+</p>
+<p>
+  <%= image_tag(@restaurant.picture) %>
+</p>
+<p>
+  <%= @restaurant.description %>
+</p>
+<p>
+  <%= @restaurant.opening_time %> - <%= @restaurant.closing_time %>
+</p>
+<p>
+  <%= @restaurant.capacity %>
+</p>
+
+<%= link_to "Edit Your Restaurant Listing", edit_restaurant_path %>
+<%= link_to "Back to Restaurant Listings", restaurants_path %>
