@@ -6,7 +6,7 @@ class OwnersController < ApplicationController
 
   def create
     @owner = Owner.new(owner_params)
-    
+
     if @owner.save
       redirect_to owner_path(@owner.id), notice: "Signed up as owner!"
     else
@@ -24,7 +24,7 @@ class OwnersController < ApplicationController
 
   def update
     @owner = Owner.find(params[:id])
-    if @owner && @owner.authenticate(params[:password])
+    if @owner.authenticate(params[:password])
       if @owner.update_attributes(owner_params)
         redirect_to owner_path(@owner.id)
       else
