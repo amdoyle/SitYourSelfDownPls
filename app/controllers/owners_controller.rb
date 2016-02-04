@@ -1,4 +1,5 @@
 class OwnersController < ApplicationController
+
   def new
     @owner = Owner.new
   end
@@ -23,13 +24,16 @@ class OwnersController < ApplicationController
   def update
     @owner = Owner.find(params[:id])
 
-
     if @owner.update_attributes(owner_params)
       redirect_to owner_path(@owner.id)
     else
       render :edit
     end
+  end
 
+  def destroy
+    @owner = Owner.find(params[:id])
+    @owner.destroy
   end
 
   private

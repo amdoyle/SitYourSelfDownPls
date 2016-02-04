@@ -1,24 +1,27 @@
 <h1>Edit Owner</h1>
+<% if current_owner && session[:owner_id].to_i == params[:id].to_i %>
+  <%= form_for(@owner) do |f| %>
+    <div class = "field">
+      <%= label_tag :password, "Re-enter your password: " %>
+      <%= f.password_field :password %>
+    </div>
 
-<%= form_for(@owner) do |f| %>
-  <div class = "field">
-    <%= label_tag :password, "Re-enter your password: " %>
-    <%= f.password_field :password %>
-  </div>
+    <div class = "field">
+      <%= f.label :username %>
+      <%= f.text_field :username %>
+    </div>
 
-  <div class = "field">
-    <%= f.label :username %>
-    <%= f.text_field :username %>
-  </div>
-
-  <div class = "field">
-    <%= f.label :email %>
-    <%= f.email_field :email %>
-  </div>
+    <div class = "field">
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+    </div>
 
 
 
-  <div class = "actions">
-    <%= f.submit %>
-  </div>
+    <div class = "actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+<% else %>
+  <p>You don't have permission to edit this owner.</p>
 <% end %>
