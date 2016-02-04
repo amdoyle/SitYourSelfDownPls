@@ -13,6 +13,7 @@ class RestaurantsController < ApplicationController
 
   def new
     @restaurant = Restaurant.new
+    @categories = Category.all
   end
 
   def create
@@ -31,6 +32,7 @@ class RestaurantsController < ApplicationController
 
   def edit
     @restaurant = Restaurant.find(params[:id])
+    @categories = Category.all
   end
 
   def update
