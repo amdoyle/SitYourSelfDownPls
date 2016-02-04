@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
         session[:owner_id] = owner.id
         redirect_to owner_path(owner.id), notice: "Logged in as owner!"
       else
-        render "new", notice: "Login is as owner failed"
+        redirect_to new_session_path, notice: "Login is as owner failed"
       end
     elsif params[:user_type]=="user"
       user = User.find_by(email: params[:email])
@@ -17,9 +17,14 @@ class SessionsController < ApplicationController
         session[:user_id] = user.id
         redirect_to user_path(user.id), notice: "Logged in as user!"
       else
-        render "new", notice: "Login is as user failed"
+        redirect_to new_session_path, notice: "Login is as user failed"
       end
+    else
+      redirect_to new_session_path, notice: "You didn't choose if you were an owner or user."
+
     end
+
+
 
   end
 
