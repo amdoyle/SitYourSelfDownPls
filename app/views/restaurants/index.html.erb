@@ -1,18 +1,15 @@
-<h1>Resturant List for <%= @restaurants.length %></h1>
+<h1>Resturant List</h1>
 
-<% @restaurants.each do |restaurant| %>
-  <div class="restaurant">
-    <p>
-      <%= link_to restaurant.name, "restaurants/#{restaurant.id}" %>
-    </p>
-    <p>
-      <%= restaurant.address %>
-    </p>
-    <p>
-      <%= restaurant.phone_number %>
-    </p>
-    <p>
-      <%= restaurant.description %>
-    </p>
-  </div>
+
+
+<%= form_tag(restaurants_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search Restaurant" %>
+  <%= submit_tag "Search" %>
 <% end %>
+
+
+  <% if params[:search] %>
+    <%= render "restaurant" %>
+  <% else %>
+    <%= render "restaurant" %>
+  <% end %>
