@@ -8,7 +8,7 @@ class ReservationsController < ApplicationController
   def create
     @reservation = @restaurant.reservations.build(reservation_params)
     if @reservation.save
-      redirect_to restaurant_path(@reservation.restaurant_id), notice: "Reservation has been created!"
+      redirect_to restaurant_path(@reservation.restaurant_id), notice: "Reservation has been created! #{@reservation.time}"
     else
       render "new"
     end
