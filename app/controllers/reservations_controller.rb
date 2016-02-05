@@ -1,8 +1,12 @@
 class ReservationsController < ApplicationController
-  before_action :load_restaurant, only: [:new, :create]
+  before_action :load_restaurant, only: [:new, :create, :destroy, :edit]
 
   def new
     @reservation = Reservation.new
+  end
+
+  def edit
+    @reservation = Reservation.find(params[:id])
   end
 
   def create
@@ -15,6 +19,15 @@ class ReservationsController < ApplicationController
     # else
     #   render "new"
     # end
+  end
+
+  def destroy
+    @reservation = Reservation.find(params[:id])
+    if @reservation.delete
+      redirect_to reservations_path
+    else
+      redirect_to reservations_path, notice: "Something went wrong, not deleted"
+    end
   end
 
   def show
