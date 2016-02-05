@@ -1,29 +1,5 @@
-<h1>Restaurant Homepage</h1>
+<h1>Edit Reservation</h1>
 
-<p>
-  <%= @restaurant.name %>
-</p>
-<p>
-  <%= @restaurant.address %>
-</p>
-<p>
-  <%= @restaurant.phone_number %>
-</p>
-<p>
-  <%= image_tag(@restaurant.picture) %>
-</p>
-<p>
-  <%= @restaurant.description %>
-</p>
-<p>
-  <%= @restaurant.opening_time %> - <%= @restaurant.closing_time %>
-</p>
-<p>
-  <%= @restaurant.capacity %>
-</p>
-
-
-<% if current_user %>
 
 
 <%= form_for([@restaurant, @reservation]) do |f| %>
@@ -53,20 +29,7 @@
     <%= f.datetime_local_field :time %>
   </div>
 
-  <div class = "field">
-    <%= f.label :comment %>
-    <%= f.text_area :comment %>
-  </div>
-
   <div class = "actions">
     <%= f.submit %>
   </div>
 <% end %>
-<% else %>
-<p>Only users can add reservations.</p>
-<% end %>
-
-<p> <%= link_to "Edit Your Restaurant Listing", edit_restaurant_path %> |
-
-<%= link_to "Back to Restaurant Listings", restaurants_path %>
-</p>

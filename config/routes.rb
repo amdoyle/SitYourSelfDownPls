@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     resources :reservations
   end
   resources :categories
+
+  get "reservations" => "reservations#index"
 end
 
 
