@@ -2,6 +2,7 @@ class RestaurantsController < ApplicationController
 
   def index
     @restaurants = Restaurant.all
+    @categories = Category.all
 
     if params[:search]
       @restaurants = Restaurant.search(params[:search])
@@ -56,7 +57,7 @@ class RestaurantsController < ApplicationController
 
   def restaurant_params
     params.require(:restaurant).permit(:name,:address, :phone_number,
-    :picture, :description, :capacity, :opening_time, :closing_time)
+    :picture, :description, :capacity, :opening_time, :closing_time, :category_id)
   end
 
 end

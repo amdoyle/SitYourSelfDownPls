@@ -4,7 +4,7 @@ class Restaurant < ActiveRecord::Base
   belongs_to :owner
 
   def self.search(search)
-    where("name LIKE ? OR description LIKE ?", "%#{search}%", "%#{search}%")
+    joins(:category).where("restaurants.name LIKE ? or categories.name LIKE ?", "%#{search}%","%#{search}%")
   end
 
 end

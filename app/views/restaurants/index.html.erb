@@ -1,15 +1,15 @@
 <h1>Resturant List</h1>
 
-
-
+<div class="restaurant">
 <%= form_tag(restaurants_path, :method => "get", id: "search-form") do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search Restaurant" %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search" %>
   <%= submit_tag "Search" %>
 <% end %>
+</div>
 
-
-  <% if params[:search] %>
+  <% if params[:search] && @restaurants.empty? %>
+    Nothing matched your search terms.
     <%= render "restaurant" %>
   <% else %>
-    <%= render "restaurant" %>
+     <%= render "restaurant" %>
   <% end %>
