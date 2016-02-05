@@ -41,13 +41,18 @@
   </div>
 
   <div class = "field">
-    <%= f.label :numer %>
+    <%= f.label :number %>
     <%= f.number_field :number %>
   </div>
 
   <div class = "field">
     <%= f.label :time %>
     <%= f.datetime_local_field :time %>
+  </div>
+
+  <div class = "field">
+    <%= f.label :comment %>
+    <%= f.text_area :comment %>
   </div>
 
   <div class = "actions">
