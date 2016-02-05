@@ -25,7 +25,6 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.find(params[:id])
     if @reservation.delete
       redirect_to reservations_path
->>>>>>> 4de3fe2d610cded161272d64ee9b5d1e293e9152
     else
       redirect_to reservations_path, notice: "Something went wrong, not deleted"
     end
