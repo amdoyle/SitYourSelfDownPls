@@ -29,5 +29,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    session[:user_id] = nil
+    session[:owner_id] = nil
   end
 end

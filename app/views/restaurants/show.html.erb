@@ -21,8 +21,9 @@
 <p>
   <%= @restaurant.capacity %>
 </p>
-<p>
-</p>
+
+
+<% if current_user %>
 
 
 <%= form_for([@restaurant, @reservation]) do |f| %>
@@ -60,6 +61,9 @@
   <div class = "actions">
     <%= f.submit %>
   </div>
+<% end %>
+<% else %>
+<p>Only users can add reservations.</p>
 <% end %>
 
 

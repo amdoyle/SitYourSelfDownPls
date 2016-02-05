@@ -1,22 +1,42 @@
 class ReservationsController < ApplicationController
-  before_action :load_restaurant
+  before_action :load_restaurant, only: [:new, :create, :destroy, :edit]
 
   def new
     @reservation = Reservation.new
   end
 
+  def edit
+    @reservation = Reservation.find(params[:id])
+  end
+
   def create
-    @reservation = @restaurant.reservations.build(reservation_params)
+
+    @restaurant.available?(params[:reservation][:number], params[:reservation][:time])
+    # @reservation = @restaurant.reservations.build(reservation_params)
     # @reservation.user = current_user
-    if @reservation.save
-      redirect_to restaurant_path(@reservation.restaurant_id), notice: "Reservation has been created! #{@reservation.time}"
+    # if @reservation.save
+    #   redirect_to restaurant_path(@reservation.restaurant_id), notice: "Reservation has been created! #{@reservation.time}"
+    # else
+    #   render "new"
+    # end
+  end
+
+  def destroy
+    @reservation = Reservation.find(params[:id])
+    if @reservation.delete
+      redirect_to reservations_path
+>>>>>>> 4de3fe2d610cded161272d64ee9b5d1e293e9152
     else
-      render "new"
+      redirect_to reservations_path, notice: "Something went wrong, not deleted"
     end
   end
 
   def show
     @reservation = Reservation.find(params[:id])
+  end
+
+  def index
+    @reservations = current_user.reservations.all
   end
 
   # Reservations nested under Restaurant, therefore using :restaurant_id
