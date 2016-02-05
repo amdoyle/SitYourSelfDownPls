@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-  before_action :load_restaurant
+  before_action :load_restaurant, only: [:new, :create]
 
   def new
     @reservation = Reservation.new
@@ -7,18 +7,22 @@ class ReservationsController < ApplicationController
 
   def create
 
-    # @restaurant.available?(params[:number], params[:time])
-    @reservation = @restaurant.reservations.build(reservation_params)
-    @reservation.user = current_user
-    if @reservation.save
-      redirect_to restaurant_path(@reservation.restaurant_id), notice: "Reservation has been created! #{@reservation.time}"
-    else
-      render "new"
-    end
+    @restaurant.available?(params[:reservation][:number], params[:reservation][:time])
+    # @reservation = @restaurant.reservations.build(reservation_params)
+    # @reservation.user = current_user
+    # if @reservation.save
+    #   redirect_to restaurant_path(@reservation.restaurant_id), notice: "Reservation has been created! #{@reservation.time}"
+    # else
+    #   render "new"
+    # end
   end
 
   def show
     @reservation = Reservation.find(params[:id])
+  end
+
+  def index
+    @reservations = current_user.reservations.all
   end
 
   # Reservations nested under Restaurant, therefore using :restaurant_id
