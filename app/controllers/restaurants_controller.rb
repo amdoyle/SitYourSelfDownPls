@@ -2,10 +2,18 @@ class RestaurantsController < ApplicationController
 
   def index
     @restaurants = Restaurant.all
+    @categories = Category.all
+
+    if params[:search]
+      @restaurants = Restaurant.search(params[:search])
+    else
+      @restaurants = Restaurant.all
+    end
   end
 
   def new
     @restaurant = Restaurant.new
+    @categories = Category.all
   end
 
   def create
@@ -25,6 +33,7 @@ class RestaurantsController < ApplicationController
 
   def edit
     @restaurant = Restaurant.find(params[:id])
+    @categories = Category.all
   end
 
   def update
@@ -47,7 +56,7 @@ class RestaurantsController < ApplicationController
 
   def restaurant_params
     params.require(:restaurant).permit(:name,:address, :phone_number,
-    :picture, :description, :capacity, :opening_time, :closing_time)
+    :picture, :description, :capacity, :opening_time, :closing_time, :category_id)
   end
 
 end
