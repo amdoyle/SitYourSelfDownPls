@@ -1,5 +1,8 @@
 class ReservationsController < ApplicationController
   before_action :load_restaurant, only: [:new, :create, :destroy, :edit]
+  before_action :ensure_logged_in, only: [:create, :destroy]
+  before_action :load_reservation, only: [:show, :destroy]
+
 
   def new
     @reservation = Reservation.new
@@ -10,7 +13,6 @@ class ReservationsController < ApplicationController
   end
 
   def create
-
     @restaurant.available?(params[:reservation][:number], params[:reservation][:time])
     # @reservation = @restaurant.reservations.build(reservation_params)
     # @reservation.user = current_user
