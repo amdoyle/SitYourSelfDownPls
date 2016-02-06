@@ -1,11 +1,10 @@
 class ReviewsController < ApplicationController
 
   before_action :load_restaurant
-
   before_action :ensure_logged_in, only: [:create, :destroy]
+  before_action :load_review, only: [:show, :destroy]
 
   def show
-    @review = Review.find(params[:id])
   end
 
   def create
@@ -20,7 +19,6 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    @review = Review.find(params[:id])
     @review.destroy
   end
 
@@ -31,5 +29,9 @@ private
 
     def load_restaurant
       @restaurant = Restaurant.find(params[:restaurant_id])
+    end
+
+    def load_review
+      @review = Review.find(params[:id])
     end
 end
