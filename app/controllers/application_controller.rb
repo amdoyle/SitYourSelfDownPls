@@ -16,4 +16,11 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :current_owner
 
+  def ensure_logged_in
+    unless current_user
+      redirect_to new_session_url, alert: "You to be logged in to perform this action"
+    end
+  end
+  
+
 end
