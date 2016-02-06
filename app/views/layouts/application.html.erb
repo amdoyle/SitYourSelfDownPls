@@ -7,6 +7,38 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+
+  <div class="userinfo">
+    <% if current_user %>
+      <p>Signed in as <%= current_user.username %>.</p>
+    <% elsif current_owner %>
+      <p>Signed in as <%= current_owner.username %>.</p>
+    <% else %>
+     <%= link_to "Log In", new_session_path %> or <%= link_to "Sign Up", new_user_path %>
+    <% end %>
+  </div>
+
+  <div id="logout">
+    <% if current_owner || current_user %>
+      <p><%= link_to "Log out", session_path("current"), :method => :delete %>
+    <% end %>
+  </div>
+
+  <div id="nav">
+      <% if current_owner %>
+        <%= link_to "Create New Resturant Page", new_restaurant_path %>
+        <%= link_to "View Your Current Resturants", restaurants_path %>
+        <%= link_to "Edit Your Profile", edit_owner_path(current_owner) %>
+      <% elsif current_user %>
+        <%= link_to "View Resturants", restaurants_path %>
+        <%= link_to "Edit Your Profile", edit_user_path(current_user) %>
+        <%= link_to "Search", restaurants_path %>
+      <% else %>
+        <%= link_to "View Resturants", restaurants_path %>
+      <% end %>
+  </div>
+
   <% if flash[:notice] %>
     <p id="notice"><%= flash[:notice] %></p>
   <% end %>
@@ -17,7 +49,5 @@
 
 <%= yield %>
 
-<p><%= link_to "Log out", session_path("current"), :method => :delete %>
-  </p>
 </body>
 </html>

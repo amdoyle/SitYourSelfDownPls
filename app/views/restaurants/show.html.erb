@@ -7,7 +7,12 @@
 <p><%= image_tag(@restaurant.picture) %></p>
 <p><%= @restaurant.description %></p>
 <p><%= @restaurant.opening_time %> - <%= @restaurant.closing_time %></p>
-<p><%= @restaurant.category.name %></p>
+
+  <% if @restaurant.category != nil %>
+    <p><%= @restaurant.category.name %></p>
+  <% else %>
+  <% end %>
+  
 <p><%= @restaurant.capacity %></p>
 
 <%= render "reservation" %>

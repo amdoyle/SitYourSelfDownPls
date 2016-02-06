@@ -21,6 +21,7 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review.destroy
+    redirect_to restaurant_path
   end
 
 private
