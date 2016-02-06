@@ -48,7 +48,7 @@
   </div>
 <% end %>
 <% else %>
-<p>Only users can add reservations.</p>
+<p>Only users can add reservations. Please <%= link_to "Log in", new_session_path %> to make a new reservation.</p>
 <% end %>
 
 
@@ -68,7 +68,7 @@
        </div>
 
   <% else %>
-   <p>Please <%= link_to "Log in", new_session_path %> to make a new reservations.</p>
+   <p>Please <%= link_to "Log in", new_session_path %> to make a new reservation.</p>
   <% end %>
 <% end %>
 

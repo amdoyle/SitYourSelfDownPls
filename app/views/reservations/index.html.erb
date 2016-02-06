@@ -10,6 +10,6 @@
 <p><strong>At <%= reservation.time %></strong></p>
 
 <%= link_to "Delete Reservation", restaurant_reservation_path(restaurant, reservation), :method => :delete %>
-| <%= link_to "Edit Reservation", edit_restaurant_reservation_path(restaurant, reservation) %>
+<%= link_to "Edit Reservation", edit_restaurant_reservation_path(restaurant, reservation) %>
 
 <% end %>

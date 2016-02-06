@@ -20,12 +20,8 @@ class SessionsController < ApplicationController
         redirect_to new_session_path, notice: "Login is as user failed"
       end
     else
-      redirect_to new_session_path, notice: "You didn't choose if you were an owner or user."
-
+      redirect_to new_session_path, notice: "Please select owner or user."
     end
-
-
-
   end
 
   def destroy
