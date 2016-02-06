@@ -13,25 +13,31 @@ body {
 
 nav {
   ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    list-style-type:none;
+    margin:0;
+    padding:0;
     border-style: solid;
-    border-color: #16E37C;
+    border-color: #28FABE;
   }
 
   li { display: inline-block; }
 
   a {
     display: block;
-    padding: 6px 12px;
+    padding: 5px 20px;
     text-decoration: none;
   }
 }
 
-
-
-
+a {
+  color: #0090B2;
+  &:hover {
+    color: #FF7A00;
+  }
+  &:active {
+    color: #B25500;
+  }
+}
 
 
 h1, h2, h3, h4, h5, h6 {
