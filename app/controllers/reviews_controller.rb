@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
 
   before_action :load_restaurant
+  before_action :ensure_logged_in, only: [:create, :destroy]
 
   def show
     @review = Review.find(params[:id])
@@ -8,7 +9,7 @@ class ReviewsController < ApplicationController
 
   def create
     @review = @restaurant.reviews.build(review_params)
-
+      @review.user = current_user
 
     if @review.save
       redirect_to restaurants_path, notice:"Your review has been successfully saved"

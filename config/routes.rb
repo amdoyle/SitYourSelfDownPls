@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :categories, except: [:destroy]
   resources :restaurants do
     resources :reservations
-    resources :reviews
+    resources :reviews, only: [:show, :create, :destroy]
   end
   resources :categories
 
