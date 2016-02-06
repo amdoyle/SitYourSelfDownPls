@@ -24,7 +24,10 @@
 
 <%= render "reservation" %>
 <%= render "current_user_comments" %>
-<%= render "form_review" %>
+<% if current_user %>
+  <%= render "form_review" %>
+<% else %>
+<% end %>
 
 <p> <%= link_to "Edit Your Restaurant Listing", edit_restaurant_path %>
 <%= link_to "Back to Restaurant Listings", restaurants_path %>
