@@ -33,6 +33,7 @@ class RestaurantsController < ApplicationController
     if current_user
       @review = @restaurant.reviews.build
     end
+
   end
 
   def edit

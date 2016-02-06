@@ -35,6 +35,8 @@ before_action :load_user, only: [:edit, :update, :destroy, :show]
 
   def show
 
+      @review = @restaurant.reviews.build
+
   end
 
 

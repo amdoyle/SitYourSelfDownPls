@@ -4,10 +4,12 @@
   <p>
     <ul>
       <li><%= review.comment %></li>
-        <% if current_user != nil %>
+        <% if review.user != nil %>
           <li>
-            <%= review.user %> gave <%= review.restaurant.name %> <%= review.rating %> Stars. Review created at <%= review.created_at %></li>
-        <% end %>
+            <%= review.user.username %> gave <%= review.restaurant.name %>
+            <%= review.rating %> Stars. Review created at <%= review.created_at %>
+          </li>
+      <% end %>
     </ul>
   </p>
 <% end %>

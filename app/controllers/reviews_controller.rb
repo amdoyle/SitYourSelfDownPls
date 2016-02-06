@@ -5,6 +5,7 @@ class ReviewsController < ApplicationController
   before_action :load_review, only: [:show, :destroy]
 
   def show
+    @review.user = User.find(params[:user_id])
   end
 
   def create
