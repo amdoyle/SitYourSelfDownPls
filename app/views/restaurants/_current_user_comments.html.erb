@@ -1,0 +1,15 @@
+<h3>Reviews:</h3>
+
+<% @restaurant.reviews.each do |review| %>
+  <p>
+    <ul>
+      <li><%= review.comment %></li>
+        <% if review.user != nil %>
+          <li>
+            <%= review.user.username %> gave <%= review.restaurant.name %>
+            <%= review.rating %> Stars. Review created at <%= review.created_at %>
+          </li>
+      <% end %>
+    </ul>
+  </p>
+<% end %>
