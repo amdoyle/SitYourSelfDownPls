@@ -9,45 +9,15 @@
 <p><%= @restaurant.opening_time %> - <%= @restaurant.closing_time %></p>
 <p><%= @restaurant.capacity %></p>
 
+<%= render "reservation" %>
+
+<%= render "current_user_comments" %>
+
 
 <% if current_user %>
-<%= form_for([@restaurant, @reservation]) do |f| %>
-  <% if @reservation.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@reservation.errors.count, "error") %> Reservation is unavailable</h2>
-
-      <ul>
-      <% @reservation.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class = "field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class = "field">
-    <%= f.label :number %>
-    <%= f.number_field :number %>
-  </div>
-
-  <div class = "field">
-    <%= f.label :time %>
-    <%= f.datetime_local_field :time %>
-  </div>
-
-  <div class = "field">
-    <%= f.label :comment %>
-    <%= f.text_area :comment %>
-  </div>
-
-  <div class = "actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+  <%= render "form_review" %>
 <% else %>
+
 <p>Only users can add reservations. Please <%= link_to "Log in", new_session_path %> to make a new reservation.</p>
 <% end %>
 
@@ -74,4 +44,3 @@
 
 <p><%= link_to "Edit Your Restaurant Listing", edit_restaurant_path %></p>
 <p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
-<% end %>

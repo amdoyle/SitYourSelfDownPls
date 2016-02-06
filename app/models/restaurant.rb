@@ -2,6 +2,8 @@ class Restaurant < ActiveRecord::Base
   has_many :reservations
   belongs_to :category
   belongs_to :owner
+  has_many :reviews
+  has_many :users, through: :reviews
 
   def self.search(search)
     joins(:category).where("restaurants.name LIKE ? or categories.name LIKE ?", "%#{search}%","%#{search}%")

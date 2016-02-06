@@ -1,0 +1,39 @@
+
+<h3>Add a New Review:</h3>
+
+  <%= form_for ([@restaurant, @review]) do |f| %>
+
+    <div class="field">
+      <% if @review.errors.any? %>
+
+        <div id="error_explanation">
+          <h2><%= pluarlize(@review.errors.count, "error") %></h2>
+          <ul>
+            <% @review.errors.full_messages.each do |message| %>
+              <li>message</li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= f.label :comment, "Review: " %>
+      <%= f.text_area :comment %>
+    </div>
+
+    <div class="field">
+      <%= f.label :rating, "1 Star"  %>
+      <%= f.radio_button(:rating, 1) %>
+      <%= f.label :rating, "2 Star"  %>
+      <%= f.radio_button(:rating, 2) %>
+      <%= f.label :rating, "3 Star"  %>
+      <%= f.radio_button(:rating, 3) %>
+      <%= f.label :rating, "4 Star"  %>
+      <%= f.radio_button(:rating, 4) %>
+      <%= f.label :rating, "5 Star"  %>
+      <%= f.radio_button(:rating, 5) %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+    <% end %>

@@ -29,6 +29,11 @@ class RestaurantsController < ApplicationController
   def show
     @restaurant = Restaurant.find(params[:id])
     @reservation = @restaurant.reservations.build
+
+    if current_user
+      @review = @restaurant.reviews.build
+    end
+
   end
 
   def edit
@@ -55,7 +60,7 @@ class RestaurantsController < ApplicationController
   private
 
   def restaurant_params
-    params.require(:restaurant).permit(:name,:address, :phone_number,
+    params.require(:restaurant).permit(:name, :address, :phone_number,
     :picture, :description, :capacity, :opening_time, :closing_time, :category_id)
   end
 
