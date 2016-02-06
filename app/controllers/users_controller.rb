@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
 before_action :load_user, only: [:edit, :update, :destroy, :show]
 
   def new

@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SitYoAssDownPls</title>
+  <title>Seat Yourself Down, Please</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <!--[if lt IE 9]>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+  </script>
+<![endif]-->
+
 </head>
 <body>
   <% if flash[:notice] %>
@@ -14,10 +20,23 @@
     <p id="alert"><%= flash[:alert] %></p>
   <% end %>
 
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <nav>
+      <img alt="Logo" src="http://s10.postimg.org/szyaitfyd/sydp-logo.png", class: "logo" />
+      <ul>
+        <li><%= link_to "Log In", new_session_path %></li>
+        <li><%= link_to "Sign Up", new_user_path %></li>
+        <li><%= link_to "Log Out", session_path("current"), :method => :delete %></li>
+      <ul>
+  </div>
+</header>
+<div class="container">
+
+
 
 <%= yield %>
 
-<p><%= link_to "Log out", session_path("current"), :method => :delete %>
-  </p>
+</p>
 </body>
 </html>

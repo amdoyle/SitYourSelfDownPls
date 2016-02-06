@@ -1,5 +1,4 @@
 <h1>Restaurant Homepage</h1>
-<p>Please <%= link_to "Log in", new_session_path %> or <%= link_to "Sign Up", new_user_path %> to make reservations.</p>
 
 <p><%= @restaurant.name %></p>
 <p><%= @restaurant.address %></p>
@@ -38,7 +37,7 @@
        </div>
 
   <% else %>
-   <p>Please <%= link_to "Log in", new_session_path %> to make a new reservation.</p>
+   <p>Please <%= link_to "Log In", new_session_path %> to make a new reservation.</p>
   <% end %>
 <% end %>
 
