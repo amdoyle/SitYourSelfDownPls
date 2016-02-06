@@ -6,7 +6,8 @@ class Restaurant < ActiveRecord::Base
   has_many :users, through: :reviews
 
   def self.search(search)
-    joins(:category).where("restaurants.name LIKE ? or categories.name LIKE ?", "%#{search}%","%#{search}%")
+    joins(:category).where("restaurants.name LIKE ? or categories.name LIKE ?", "%#{search}%","%#{search}%").joins('LEFT JOIN reviews ON restaurants.id = reviews.restaurant_id')
+    .group('restaurants.id').order("AVG(reviews.rating) DESC")
   end
 
   def available?(party_size, time)

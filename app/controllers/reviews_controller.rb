@@ -13,9 +13,9 @@ class ReviewsController < ApplicationController
       @review.user = current_user
 
     if @review.save
-      redirect_to restaurant_path(@restaurant), notice:"Your review has been successfully saved"
+      redirect_to restaurant_path(@restaurant), notice:"Your review has been successfully saved."
     else
-      redirect_to restaurant_path(@restaurant)
+      redirect_to restaurant_path(@restaurant), notice:"Your review has not been saved."
     end
   end
 
