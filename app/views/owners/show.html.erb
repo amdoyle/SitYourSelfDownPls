@@ -3,8 +3,8 @@
 <p><strong>Username: </strong><%= @owner.username %></p>
 <p><strong>Email: </strong><%= @owner.email %></p>
 
-
-<p> <%= link_to "Edit Your Restaurant Details", edit_restaurant_path %>
+<%= link_to 'Edit Account', edit_owner_path(@owner) %>
+<p> <%= link_to "Edit Restaurant Details", edit_restaurant_path %>
 <p><%= link_to 'Delete Account', @owner, method: :delete, data:
   {confirm: 'Are you sure you want to delete this account?'} %>
 </p>
