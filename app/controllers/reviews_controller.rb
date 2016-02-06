@@ -1,17 +1,19 @@
 class ReviewsController < ApplicationController
 
+  before_action :load_restaurant
+
   def show
     @review = Review.find(params[:id])
   end
 
   def create
     @review = @restaurant.reviews.build(review_params)
-    @review.user = current_user
+
 
     if @review.save
-      redirect_to restaurant_path, notice:"Your review has been successfully saved"
+      redirect_to restaurants_path, notice:"Your review has been successfully saved"
     else
-      render "restaurant/show"
+      render restaurants_path
     end
   end
 
@@ -25,7 +27,7 @@ class ReviewsController < ApplicationController
       params.require(:review).permit(:comment, :rating, :user_id, :restaurant_id)
     end
 
-    def load_product
+    def load_restaurant
       @restaurant = Restaurant.find(params[:restaurant_id])
     end
 end
