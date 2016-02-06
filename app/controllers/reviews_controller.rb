@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
 
   before_action :load_restaurant
-  before_action :ensure_logged_in, only: [:create, :destroy]
+
 
   def show
     @review = Review.find(params[:id])
@@ -12,9 +12,9 @@ class ReviewsController < ApplicationController
       @review.user = current_user
 
     if @review.save
-      redirect_to restaurants_path, notice:"Your review has been successfully saved"
+      redirect_to restaurant_path(@restaurant), notice:"Your review has been successfully saved"
     else
-      render restaurants_path
+      redirect_to restaurant_path(@restaurant)
     end
   end
 
@@ -23,7 +23,7 @@ class ReviewsController < ApplicationController
     @review.destroy
   end
 
-  private
+private
     def review_params
       params.require(:review).permit(:comment, :rating, :user_id, :restaurant_id)
     end
