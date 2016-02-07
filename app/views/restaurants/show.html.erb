@@ -1,11 +1,22 @@
-<h1>Restaurant Homepage</h1>
 
-<p><%= @restaurant.name %></p>
+<h1><%= @restaurant.name %></h1>
+
+<% if !current_owner && !current_user %>
+  <p>Please <%= link_to "Log in", new_session_path %> or <%= link_to "Sign Up", new_user_path %>
+    to make reservations.</p>
+<% end %>
+
 <p><%= @restaurant.address %></p>
 <p><%= @restaurant.phone_number %></p>
 <p><%= image_tag(@restaurant.picture) %></p>
 <p><%= @restaurant.description %></p>
 <p><%= @restaurant.opening_time %> - <%= @restaurant.closing_time %></p>
+
+  <% if @restaurant.category != nil %>
+    <p><%= @restaurant.category.name %></p>
+  <% else %>
+  <% end %>
+
 <p><%= @restaurant.capacity %></p>
 
 <%= render "reservation" %>
@@ -16,8 +27,7 @@
 <% if current_user %>
   <%= render "form_review" %>
 <% else %>
-
-<p>Only users can add reservations. Please <%= link_to "Log in", new_session_path %> to make a new reservation.</p>
+  <p>Only users can add reservations. Please <%= link_to "Log in", new_session_path %> to make a new reservation.</p>
 <% end %>
 
 
@@ -27,7 +37,8 @@
    <%= form_for([@restaurant, @reservation]) do |f| %>
      <% if @reservation.errors.any? %>
        <div id="error_explanation">
-         <h2><%= pluralize(@reservation.errors.count, "error") %> You are unable to make reservations unless you are logged in:</h2>
+         <h2><%= pluralize(@reservation.errors.count, "error") %>
+           You are unable to make reservations unless you are logged in:</h2>
 
          <ul>
          <% @reservation.errors.full_messages.each do |msg| %>
@@ -36,10 +47,17 @@
          </ul>
        </div>
 
-  <% else %>
-   <p>Please <%= link_to "Log In", new_session_path %> to make a new reservation.</p>
-  <% end %>
-<% end %>
+    <% else %>
+      <p>Please <%= link_to "Log In", new_session_path %> to make a new reservation.</p>
+    <% end %>
+    <% end %>
 
 <p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
+
+<% unless current_owner == @restaurant.owner_id %>
+  <p><%= link_to "Edit Your Restaurant Listing", edit_restaurant_path %></p>
+  <p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
+<% else %>
+  <p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
+<% end %>
 <% end %>
