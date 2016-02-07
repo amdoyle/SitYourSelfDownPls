@@ -17,12 +17,12 @@ class ReservationsController < ApplicationController
     if @reservation.update_attributes(reservation_params)
       redirect_to reservations_path, notice: "Reservation updated"
     else
-      redirect_to edit_restaurant_reservation_path(restaurant, reservation)
+      redirect_to edit_restaurant_reservation_path(restaurant, reservation), notice: "Problem updating reservation"
     end
   end
 
   def create
-      if @restaurant.available?(params[:reservation][:number], params[:reservation][:time])
+    if @restaurant.available?(params[:reservation][:number], params[:reservation][:time])
       @reservation = @restaurant.reservations.build(reservation_params)
       @reservation.user = current_user
       if @reservation.save
@@ -59,7 +59,7 @@ class ReservationsController < ApplicationController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:name, :number, :time)
+    params.require(:reservation).permit(:name, :number, :time, :comment)
   end
 
 end
