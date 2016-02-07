@@ -1,5 +1,6 @@
 class RestaurantsController < ApplicationController
 
+  before_action :ensure_owner, only: [:create, :edit, :update, :create]
 
   def index
     @restaurants = Restaurant.all

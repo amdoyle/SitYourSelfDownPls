@@ -22,6 +22,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def ensure_owner
+    unless current_owner
+      redirect_to new_session_url, alert: "You to be logged in to perform this action"
+    end
+  end
+
 private
 
 def authorize

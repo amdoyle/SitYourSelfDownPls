@@ -27,8 +27,9 @@
 <% else %>
 <% end %>
 
-<% if current_owner == @restaurant.owner %>
+<% unless current_owner == @restaurant.owner_id %>
   <p><%= link_to "Edit Your Restaurant Listing", edit_restaurant_path %></p>
+  <p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
+<% else %>
+  <p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
 <% end %>
-
-<p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
