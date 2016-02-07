@@ -1,5 +1,6 @@
 <h1>Your Reservations</h1>
 
+--------------------------------------------------
 <% @reservations.each do | reservation | %>
 <% restaurant = Restaurant.find(reservation.restaurant_id) %>
 <p><strong>Restaurant Name: </strong><%= restaurant.name %></p>
@@ -10,7 +11,7 @@
 <p><strong>At <%= reservation.time %></strong></p>
 <p><strong>Comment: </strong><%= reservation.comment %></p>
 
-<%= link_to "Delete Reservation", restaurant_reservation_path(restaurant, reservation), :method => :delete %>
-<%= link_to "Edit Reservation", edit_restaurant_reservation_path(restaurant, reservation) %>
-
+<p><%= link_to "Delete Reservation", restaurant_reservation_path(restaurant, reservation), :method => :delete %>
+  <%= link_to "Edit Reservation", edit_restaurant_reservation_path(restaurant, reservation) %></p>
+--------------------------------------------------
 <% end %>
