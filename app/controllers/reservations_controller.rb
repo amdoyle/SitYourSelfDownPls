@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-  before_action :load_restaurant, only: [:new, :create, :destroy, :edit]
+  before_action :load_restaurant, only: [:new, :edit, :create, :update]
   before_action :ensure_logged_in, only: [:create, :destroy]
   before_action :load_reservation, only: [:show, :destroy]
 
@@ -14,10 +14,14 @@ class ReservationsController < ApplicationController
 
   def update
     @reservation = Reservation.find(params[:id])
-    if @reservation.update_attributes(reservation_params)
-      redirect_to reservations_path, notice: "Reservation updated"
+    if @restaurant.available?(params[:reservation][:number], params[:reservation][:time], @reservation)
+      if @reservation.update_attributes(reservation_params)
+        redirect_to restaurant_path(@reservation.restaurant_id), notice: "Reservation has been updated! #{@reservation.time}"
+      else
+        redirect_to edit_restaurant_reservation_path(@restaurant, @reservation), notice: "Problem updating reservation"
+      end
     else
-      redirect_to edit_restaurant_reservation_path(restaurant, reservation), notice: "Problem updating reservation"
+      redirect_to edit_restaurant_reservation_path(@restaurant, @reservation), notice: "No space for that reservation then"
     end
   end
 
@@ -26,12 +30,12 @@ class ReservationsController < ApplicationController
       @reservation = @restaurant.reservations.build(reservation_params)
       @reservation.user = current_user
       if @reservation.save
-        redirect_to restaurant_path(@reservation.restaurant_id), notice: "Reservation has been created! #{@reservation.time}"
+        redirect_to restaurant_path(@restaurant.id), notice: "Reservation has been created! #{@reservation.time}"
       else
         redirect_to reservations_path, notice: "Reservation failed to save to database."
       end
     else
-      redirect_to reservations_path, notice: "Sorry but the restaurant doesn't have available capacity at that time."
+      redirect_to restaurant_path(@restaurant.id), notice: "Sorry but the restaurant doesn't have available capacity at that time."
     end
   end
 
