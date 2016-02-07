@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-  before_action :load_restaurant, only: [:new, :create, :destroy, :edit]
+  before_action :load_restaurant, only: [:new, :edit, :create, :update]
   before_action :ensure_logged_in, only: [:create, :destroy]
   before_action :load_reservation, only: [:show, :destroy]
 
@@ -12,15 +12,31 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.find(params[:id])
   end
 
+  def update
+    @reservation = Reservation.find(params[:id])
+    if @restaurant.available?(params[:reservation][:number], params[:reservation][:time], @reservation)
+      if @reservation.update_attributes(reservation_params)
+        redirect_to restaurant_path(@reservation.restaurant_id), notice: "Reservation has been updated! #{@reservation.time}"
+      else
+        redirect_to edit_restaurant_reservation_path(@restaurant, @reservation), notice: "Problem updating reservation"
+      end
+    else
+      redirect_to edit_restaurant_reservation_path(@restaurant, @reservation), notice: "No space for that reservation then"
+    end
+  end
+
   def create
-    @restaurant.available?(params[:reservation][:number], params[:reservation][:time])
-    # @reservation = @restaurant.reservations.build(reservation_params)
-    # @reservation.user = current_user
-    # if @reservation.save
-    #   redirect_to restaurant_path(@reservation.restaurant_id), notice: "Reservation has been created! #{@reservation.time}"
-    # else
-    #   render "new"
-    # end
+    if @restaurant.available?(params[:reservation][:number], params[:reservation][:time])
+      @reservation = @restaurant.reservations.build(reservation_params)
+      @reservation.user = current_user
+      if @reservation.save
+        redirect_to restaurant_path(@restaurant.id), notice: "Reservation has been created! #{@reservation.time}"
+      else
+        redirect_to reservations_path, notice: "Reservation failed to save to database."
+      end
+    else
+      redirect_to restaurant_path(@restaurant.id), notice: "Sorry but the restaurant doesn't have available capacity at that time."
+    end
   end
 
   def destroy
@@ -37,7 +53,12 @@ class ReservationsController < ApplicationController
   end
 
   def index
-    @reservations = current_user.reservations.all
+    if current_user
+      @reservations = current_user.reservations.all
+      @reservations = @reservations.sort_by{|r| r.time}
+    elsif current_owner
+      @restaurants = current_owner.restaurants.all
+    end
   end
 
   # Reservations nested under Restaurant, therefore using :restaurant_id
@@ -47,7 +68,7 @@ class ReservationsController < ApplicationController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:name, :number, :time)
+    params.require(:reservation).permit(:name, :number, :time, :comment)
   end
 
 end
