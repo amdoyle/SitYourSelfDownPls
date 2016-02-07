@@ -50,7 +50,7 @@ class RestaurantsController < ApplicationController
       if @restaurant.update_attributes(restaurant_params)
           redirect_to restaurant_path(@restaurant)
       else
-          render :edit
+          redirect_to
       end
 
   end
@@ -58,7 +58,7 @@ class RestaurantsController < ApplicationController
   def destroy
     @restaurant = Restaurant.find(params[:id])
     @restaurant.destroy
-    redirect_to owner_path(@owner.id)
+    redirect_to restaurants_path
   end
 
   private

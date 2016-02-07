@@ -19,10 +19,11 @@ before_action :load_user, only: [:edit, :update, :destroy, :show]
 
   def update
 
+    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       redirect_to user_path(@user.id)
     else
-      render :edit
+      redirect_to edit_user_path(@user.id), notice: "Failed to save changes"
     end
 
   end
