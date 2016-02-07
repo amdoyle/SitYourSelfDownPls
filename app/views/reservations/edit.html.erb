@@ -1,5 +1,7 @@
 <h1>Edit Reservation</h1>
 
+<% if @reservation.user == current_user %>
+
 <%= form_for([@restaurant, @reservation]) do |f| %>
   <% if @reservation.errors.any? %>
     <div id="error_explanation">
@@ -30,4 +32,7 @@
   <div class = "actions">
     <%= f.submit %>
   </div>
+<% end %>
+<% else %>
+<p>You can only edit your own reservations.</p>
 <% end %>
