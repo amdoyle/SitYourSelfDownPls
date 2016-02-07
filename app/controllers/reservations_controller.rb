@@ -9,16 +9,29 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.find(params[:id])
   end
 
+  def update
+    @reservation = Reservation.find(params[:id])
+    if @reservation.update_attributes(reservation_params)
+      redirect_to reservations_path, notice: "Reservation updated"
+    else
+      redirect_to edit_restaurant_reservation_path(restaurant, reservation)
+    end
+  end
+
   def create
 
-    @restaurant.available?(params[:reservation][:number], params[:reservation][:time])
-    # @reservation = @restaurant.reservations.build(reservation_params)
-    # @reservation.user = current_user
-    # if @reservation.save
-    #   redirect_to restaurant_path(@reservation.restaurant_id), notice: "Reservation has been created! #{@reservation.time}"
-    # else
-    #   render "new"
-    # end
+    if @restaurant.available?(params[:reservation][:number], params[:reservation][:time])
+      @reservation = @restaurant.reservations.build(reservation_params)
+      @reservation.user = current_user
+      if @reservation.save
+        redirect_to restaurant_path(@reservation.restaurant_id), notice: "Reservation has been created! #{@reservation.time}"
+      else
+        redirect_to reservations_path, notice: "Reservation failed to save to database."
+      end
+    else
+      redirect_to reservations_path, notice: "Sorry but the restaurant doesn't have available capacity at that time."
+    end
+
   end
 
   def destroy
