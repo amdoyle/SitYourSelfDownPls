@@ -19,45 +19,20 @@
 
 <p><%= @restaurant.capacity %></p>
 
-<%= render "reservation" %>
-
-<%= render "current_user_comments" %>
-
-
 <% if current_user %>
-  <%= render "form_review" %>
+<h4>New Reservation</h4>
+<%= render "reservation" %>
 <% else %>
-  <p>Only users can add reservations. Please <%= link_to "Log in", new_session_path %> to make a new reservation.</p>
+<p>Please <%= link_to "Log In", new_session_path %> to make a new reservation.</p>
 <% end %>
 
+<%= render "current_user_comments" %>
+<%= render "form_review" %> 
 
-  <% if current_user %>
-   <h4>New Reservation</h4>
 
-   <%= form_for([@restaurant, @reservation]) do |f| %>
-     <% if @reservation.errors.any? %>
-       <div id="error_explanation">
-         <h2><%= pluralize(@reservation.errors.count, "error") %>
-           You are unable to make reservations unless you are logged in:</h2>
-
-         <ul>
-         <% @reservation.errors.full_messages.each do |msg| %>
-           <li><%= msg %></li>
-         <% end %>
-         </ul>
-       </div>
-
-    <% else %>
-      <p>Please <%= link_to "Log In", new_session_path %> to make a new reservation.</p>
-    <% end %>
-    <% end %>
-
-<p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
-
-<% unless current_owner == @restaurant.owner_id %>
+<% if current_owner %>
   <p><%= link_to "Edit Your Restaurant Listing", edit_restaurant_path %></p>
   <p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
 <% else %>
-  <p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
-<% end %>
+    <p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
 <% end %>
