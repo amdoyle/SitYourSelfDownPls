@@ -1,16 +1,27 @@
-<h1>Restaurant List</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Restaurants</title>
+  <link rel="stylesheet" href="/layouts/application.html.erb">
+</head>
+<body id="top">
+  <h1>Restaurant List</h1>
 
 
-<div class="restaurant">
-<%= form_tag(restaurants_path, :method => "get", id: "search-form") do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search" %>
-  <%= submit_tag "Search" %>
-<% end %>
-</div>
-
-  <% if params[:search] && @restaurants.empty? %>
-    Nothing matched your search terms.
-    <%= render "restaurant" %>
-  <% else %>
-     <%= render "restaurant" %>
+  <div class="restaurant">
+  <%= form_tag(restaurants_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search" %>
+    <%= submit_tag "Search" %>
   <% end %>
+  </div>
+
+    <% if params[:search] && @restaurants.empty? %>
+      Nothing matched your search terms.
+      <%= render "restaurant" %>
+    <% else %>
+       <%= render "restaurant" %>
+    <% end %>
+  <a href="#top">Back to top</a>
+</body>
+</html>
