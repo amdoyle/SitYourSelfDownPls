@@ -53,10 +53,13 @@
     </div>
 
     <div class="field">
+      <%= label :category_id, "Category" %>
         <% @categories.each do |category| %>
         <%= f.radio_button(:category_id, category.id) %>
       <%= f.label :category_id, category.name, :value => category.id %>
       <% end %>
+
+      <p> Don't see the category you need? <%= link_to "Add a new category", new_category_path %></p>
     </div>
 
     <div class="action">
