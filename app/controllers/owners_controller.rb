@@ -1,7 +1,5 @@
 class OwnersController < ApplicationController
 
-  before_action :authorize,:only => [:edit, :destroy, :show]
-
   def new
     @owner = Owner.new
   end
@@ -43,10 +41,5 @@ class OwnersController < ApplicationController
     params.require(:owner).permit(:username, :email, :password, :password_confirmation)
   end
 
-  def authorize
-    @restaurant = Resturant.find(params[:id])
-      if !@restaurant.owner_id == current_owner.id
-        flash[:notice] = "You can't edit this content."
-      end
-  end
+
 end

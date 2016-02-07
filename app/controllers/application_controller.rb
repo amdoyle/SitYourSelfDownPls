@@ -21,6 +21,22 @@ class ApplicationController < ActionController::Base
       redirect_to new_session_url, alert: "You to be logged in to perform this action"
     end
   end
-  
+
+private
+
+def authorize
+  if current_owner
+    @restaurant = Restaurant.find(params[:id])
+      if @restaurant.owner_id == current_owner
+
+      elsif @restaurant.owner_id != current_owner
+        redirect_to restaurants_path, notice: "You can only edit your own restaurant pages."
+      else
+        redirect_to sessions_path
+      end
+  elsif current_user
+  else
+  end
+end
 
 end

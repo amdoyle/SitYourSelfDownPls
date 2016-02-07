@@ -15,4 +15,14 @@ class Restaurant < ActiveRecord::Base
     party_size > 0 && party_size <= available_capacity
   end
 
+  def authorize
+    if current_owner
+      @restaurant = Restaurant.find(params[:id])
+        if !@restaurant.owner_id == current_owner.id
+          flash[:notice] = "You can't edit this content."
+        end
+    elsif current_user
+    else
+    end
+  end
 end
