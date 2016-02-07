@@ -18,6 +18,11 @@
     </div>
 
     <div class="field">
+      <%= f.label :url %>
+      <%= f.text_field :url %>
+    </div>
+
+    <div class="field">
       <%= f.label :address %>
       <%= f.text_field :address %>
     </div>
@@ -50,6 +55,30 @@
     <div class="field">
       <%= f.label :capacity %>
       <%= f.text_field :capacity %>
+    </div>
+
+    <div class="field">
+      <%= f.label :price_range, "Price Range:" %>
+        <div class="field_radio_button">
+          <%= f.label :price_range, "$0 - $10" %>
+          <%= f.radio_button(:price_range, 10) %>
+        </div>
+        <div class="field_radio_button">
+          <%= f.label :price_range, "$10 - $20" %>
+          <%= f.radio_button(:price_range, 20) %>
+        </div>
+        <div class="field_radio_button">
+          <%= f.label :price_range, "$20 - $30" %>
+          <%= f.radio_button(:price_range, 30) %>
+        </div>
+        <div class="field_radio_button">
+          <%= f.label :price_range, "$30 - $40" %>
+          <%= f.radio_button(:price_range, 40) %>
+        </div>
+        <div class="field_radio_button">
+          <%= f.label :price_range, "$50 +" %>
+          <%= f.radio_button(:price_range, 50) %>
+        </div>
     </div>
 
     <div class="field">
