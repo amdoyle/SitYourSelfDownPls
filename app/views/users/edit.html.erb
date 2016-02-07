@@ -2,18 +2,22 @@
 
   <% if @user == current_user %>
     <%= form_for @user do |f| %>
-    <p>
-      <%= f.label :username %><br/>
-      <%= f.text_field :username %>
-    </p>
-    <p>
-      <%= f.label :email %><br/>
-      <%= f.email_field :email %>
-    </p>
+      <div class = "field">
+        <%= f.label :password, "Re-enter password" %>
+        <%= f.password_field :password %>
+      </div>
+      <div class = "field">
+        <%= f.label :username %><br/>
+        <%= f.text_field :username %>
+      </div>
+      <div class = "field">
+        <%= f.label :email %><br/>
+        <%= f.email_field :email %>
+      </div>
 
-    <p>
-      <%= f.submit %>
-    </p>
+      <div class = "field">
+        <%= f.submit %>
+      </div>
     <% end %>
   <% else %>
     <p>You don't have permission to edit this user.</p>

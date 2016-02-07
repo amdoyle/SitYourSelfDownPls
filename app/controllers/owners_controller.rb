@@ -24,10 +24,15 @@ class OwnersController < ApplicationController
 
   def update
     @owner = Owner.find(params[:id])
-    if @owner.update_attributes(owner_params)
-      redirect_to owner_path(@owner.id)
+    if @owner.authenticate(params[:owner][:password])
+
+      if @owner.update_attributes(owner_params)
+        redirect_to owner_path(@owner.id)
+      else
+        redirect_to edit_owner_path(@owner.id), notice: "Failed to save changes"
+      end
     else
-      redirect_to edit_owner_path(@owner.id), notice: "Failed to save changes"
+      redirect_to edit_owner_path(@owner.id), notice: "Incorrect password entered"
     end
   end
 
