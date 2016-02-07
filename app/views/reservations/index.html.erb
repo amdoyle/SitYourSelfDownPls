@@ -1,17 +1,32 @@
 <h1>Your Reservations</h1>
 
---------------------------------------------------
-<% @reservations.each do | reservation | %>
-<% restaurant = Restaurant.find(reservation.restaurant_id) %>
-<p><strong>Restaurant Name: </strong><%= restaurant.name %></p>
-<p><strong>Restaurant Address: </strong><%= restaurant.address %></p>
-<p><strong>Restaurant Phone Number: </strong><%= restaurant.phone_number %></p>
-<p><strong>Your Reservation Is Under Name: </strong><%= reservation.name %></p>
-<p><strong>For <%= reservation.number %> people</strong></p>
-<p><strong>At <%= reservation.time %></strong></p>
-<p><strong>Comment: </strong><%= reservation.comment %></p>
+<% if current_user %>
+  --------------------------------------------------
+  <% @reservations.each do | reservation | %>
+  <% restaurant = Restaurant.find(reservation.restaurant_id) %>
+  <p><strong>Restaurant Name: </strong><%= restaurant.name %></p>
+  <p><strong>Restaurant Address: </strong><%= restaurant.address %></p>
+  <p><strong>Restaurant Phone Number: </strong><%= restaurant.phone_number %></p>
+  <p><strong>Your Reservation Is Under Name: </strong><%= reservation.name %></p>
+  <p><strong>For <%= reservation.number %> people</strong></p>
+  <p><strong>At <%= reservation.time %></strong></p>
+  <p><strong>Comment: </strong><%= reservation.comment %></p>
 
-<p><%= link_to "Delete Reservation", restaurant_reservation_path(restaurant, reservation), :method => :delete %>
-  <%= link_to "Edit Reservation", edit_restaurant_reservation_path(restaurant, reservation) %></p>
---------------------------------------------------
+  <p><%= link_to "Delete Reservation", restaurant_reservation_path(restaurant, reservation), :method => :delete %>
+    <%= link_to "Edit Reservation", edit_restaurant_reservation_path(restaurant, reservation) %></p>
+  --------------------------------------------------
+  <% end %>
+<% elsif current_owner %>
+  <% @restaurants.each do | restaurant | %>
+    <p><strong>Reservations for restaurant:</strong> <%= restaurant.name %></p>
+    <% reservations = restaurant.reservations.sort_by{|r| r.time} %>
+    <% reservations.each do | reservation | %>
+      --------------------------------------------------
+      <p><strong>Reservation Name:</strong> <%= reservation.name %></p>
+      <p><strong>Reservation Party Size:</strong> <%= reservation.number %></p>
+      <p><strong>Reservation Time:</strong> <%= reservation.time %></p>
+      <p><strong>Reservation Comment:</strong> <%= reservation.comment %></p>
+      --------------------------------------------------
+    <% end %>
+  <% end %>
 <% end %>

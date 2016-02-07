@@ -53,8 +53,12 @@ class ReservationsController < ApplicationController
   end
 
   def index
-    @reservations = current_user.reservations.all
-    @reservations = @reservations.sort_by{|r| r.time}
+    if current_user
+      @reservations = current_user.reservations.all
+      @reservations = @reservations.sort_by{|r| r.time}
+    elsif current_owner
+      @restaurants = current_owner.restaurants.all
+    end
   end
 
   # Reservations nested under Restaurant, therefore using :restaurant_id
