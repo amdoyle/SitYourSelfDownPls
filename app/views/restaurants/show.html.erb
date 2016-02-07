@@ -22,21 +22,7 @@
   <% else %>
   <% end %>
 
-  <div class="price_range">
-    <p>Price Range:</p>
-    <% case @restaurant.price_range %>
-      <% when 10 %>
-        <p>$</p>
-      <% when 20 %>
-        <p>$$</p>
-      <% when 30 %>
-        <p>$$$</p>
-      <% when 40 %>
-        <p>$$$$</p>
-      <% when 50 %>
-        <p>$$$$$</p>
-    <% end %>
-  </div>
+<%= render "price_range" %>
 
 <% if current_user %>
 <h4>New Reservation</h4>
