@@ -9,12 +9,28 @@
 
   <h1>Restaurant List</h1>
 
+<div class="restaurant">
 
-  <%= form_tag(restaurants_path, :method => "get", id: "search-form") do %>
-    <%= text_field_tag :search, params[:search], placeholder: "Search" %>
-    <%= submit_tag "Search" %>
-  <% end %>
-  </div>
+<%= form_tag(restaurants_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search" %>
+  <div class="price_range">
+    <%= label(:price_range, "Search by price range:") %>
+      <%= check_box_tag(:price_range, 10) %>
+      <%= label_tag(:price_range, "$") %>
+      <%= check_box_tag(:price_range, 20) %>
+      <%= label_tag(:price_range, "$$") %>
+      <%= check_box_tag(:price_range, 30) %>
+      <%= label_tag(:price_range, "$$$") %>
+      <%= check_box_tag(:price_range, 40) %>
+      <%= label_tag(:price_range, "$$$$") %>
+      <%= check_box_tag(:price_range, 50) %>
+      <%= label_tag(:price_range, "$$$$$") %>
+    </div>
+  <%= submit_tag "Search" %>
+
+<% end %>
+
+</div>
 
   <div class="restaurant">
     <% if params[:search] && @restaurants.empty? %>

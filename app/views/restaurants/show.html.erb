@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,10 +12,19 @@
   <% if !current_owner && !current_user %>
     <p>Please <%= link_to "Log in", new_session_path %> or <%= link_to "Sign Up", new_user_path %>
       to make reservations.</p>
-  <% end %>
+
+<h1><%= @restaurant.name %></h1>
+
+<% if !current_owner && !current_user %>
+  <p>Please <%= link_to "Log in", new_session_path %> or <%= link_to "Sign Up", new_user_path %>
+    to make reservations.</p>
+<% end %>
+
+
 <div class="info">
 
   <p><%= image_tag(@restaurant.picture) %></p>
+  <p><%= link_to @restaurant.url, @restaurant.url %></p>
   <p><%= @restaurant.address %></p>
   <p><%= @restaurant.phone_number %></p>
   <p><%= @restaurant.description %></p>
@@ -25,12 +35,22 @@
     <% else %>
     <% end %>
 
-  <p><%= @restaurant.capacity %></p>
+  <% if current_owner %>
+    <p>Capacity: <%= @restaurant.capacity %></p>
+  <% else %>
+  <% end %>
 
-  <%= render "reservation" %>
+<%= render "restaurants/price_range" %>
 
-  <%= render "current_user_comments" %>
+<% if current_user %>
+<h4>New Reservation</h4>
+<%= render "restaurants/reservation" %>
+<% else %>
+<p>Please <%= link_to "Log In", new_session_path %> to make a new reservation.</p>
+<% end %>
 
+
+<%= render @restaurant.reviews %>
 
   <% if current_user %>
     <%= render "form_review" %>
@@ -63,14 +83,25 @@
 
   <p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
 
-  <% unless current_owner == @restaurant.owner_id %>
-    <p><%= link_to "Edit Your Restaurant Listing", edit_restaurant_path %></p>
-    <p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
-  <% else %>
-    <p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
-  <% end %>
-  <% end %>
+    <% unless current_owner == @restaurant.owner_id %>
+      <p><%= link_to "Edit Your Restaurant Listing", edit_restaurant_path %></p>
+      <p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
+    <% else %>
+      <p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
+    <% end %>
+    <% end %>
 
 
 </body>
 </html>
+=======
+<%= render "restaurants/form_review" %>
+
+
+<% if current_owner %>
+  <p><%= link_to "Edit Your Restaurant Listing", edit_restaurant_path %></p>
+  <p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
+<% else %>
+    <p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
+<% end %>
+>>>>>>> refactor_restaurant_MVC

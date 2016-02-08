@@ -1,6 +1,7 @@
 <h1>Add a New Restaurant</h1>
 
-<% if current_owner %>
+
+<% if current_owner%>
   <%= render "form_restaurant" %>
 <% else %>
   <p>You must be logged in as an owner to create restaurants.</p>

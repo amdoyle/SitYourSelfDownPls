@@ -14,7 +14,8 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to restaurant_path(@restaurant), notice:"Your review has been successfully saved."
     else
-      redirect_to restaurant_path(@restaurant), notice:"Your review has not been saved."
+      @reservation = Reservation.new
+      render "restaurants/show"
     end
   end
 
