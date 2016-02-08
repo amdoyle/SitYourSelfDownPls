@@ -31,7 +31,7 @@
       <li><%= link_to "View Reservations For Your Restaurants", reservations_path %></li>
       <li><%= link_to "Edit Your Profile", edit_owner_path(current_owner) %></li>
       <li><%= link_to "Log Out", session_path("current"), :method => :delete %></li>
-      <li><a href="mailto:admin@seatyourselfplease.ca?subject=Query"> Message us</a></li>
+      <li><a href="mailto:admin@seatyourselfplease.ca?subject=Query">Contact us</a></li>
     </ul>
     <% elsif current_user %>
     <ul>
@@ -40,14 +40,14 @@
       <li><%= link_to "Edit Your Profile", edit_user_path(current_user) %></li>
       <li><%= link_to "Search", restaurants_path %></li>
       <li><%= link_to "Log Out", session_path("current"), :method => :delete %></li>
-      <li><a href="mailto:admin@seatyourselfplease.ca?">"Contact us"</a></li>
+      <li><a href="mailto:admin@seatyourselfplease.ca?">Contact us</a></li>
     </ul>
     <% else %>
     <ul>
       <li><%= link_to "View Resturants", restaurants_path %></li>
       <li><%= link_to "Log In", new_session_path %></li>
       <li><%= link_to "Sign Up", new_user_path %></li>
-      <li><a href="mailto:admin@seatyourselfplease.ca?">"Contact us"</a></li>
+      <li><a href="mailto:admin@seatyourselfplease.ca?">Contact us</a></li>
 
     <ul>
     <% end %>
