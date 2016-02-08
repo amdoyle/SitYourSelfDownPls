@@ -22,7 +22,7 @@
 
 <header class="navbar navbar-fixed-top">
   <div class="container">
-    <%= link_to image_tag('http://s18.postimg.org/6tmaxu50l/sydp_logo.png'), root_path %>
+    <%= link_to image_tag('http://s18.postimg.org/6tmaxu50l/sydp_logo.png'), {controller: "restaurants", action: "index"}, class: "logo" %>
     <nav>
     <% if current_owner %>
     <ul>

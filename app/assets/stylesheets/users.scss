@@ -9,13 +9,33 @@ $primary-color: #333;
 body {
   font: 100% $font-stack;
   color: $primary-color;
+  text-align: center;
+}
+
+
+.container {
+  position: relative;
+  margin: 0;
+  width: 80%;
+  border: 2px solid #333;
+  padding: 40px;
+}
+
+
+.logo {
+    position: relative;
+    left: 0px;
+    padding: 0px;
+    margin: auto;
 }
 
 nav {
   ul {
-    list-style-type:none;
+    list-style: none;
+    position: relative;
     margin:0;
     padding:0;
+    text-align:center;
     border-style: solid;
     border-color: #28FABE;
   }
@@ -24,7 +44,7 @@ nav {
 
   a {
     display: block;
-    padding: 5px 20px;
+    padding: 5px 30px;
     text-decoration: none;
   }
 }
