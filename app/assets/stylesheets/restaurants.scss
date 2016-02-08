@@ -3,8 +3,37 @@ body {
 }
 
 .restaurant{
-  background-color: #12A387;
+  display: inline-block;
+  margin: 0 10px;
   width: 200px;
-  height: 200px;
-  display: block;
+
+  .image {
+    margin-bottom: -4px;
+    width: 200px;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  .text-wrap {
+    background: #ccc;
+  }
+}
+
+.search  {
+  margin: 0 10px 20px;
+
+  input[type=text] {
+    width: 400px;
+    font-size: 35px;
+    line-height: 40px;
+    padding-left: 10px;
+    text-align: center;
+
+  }
+  input[type=submit] {
+    width: 50px
+
+  }
 }

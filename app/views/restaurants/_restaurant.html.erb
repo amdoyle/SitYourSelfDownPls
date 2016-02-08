@@ -1,15 +1,14 @@
 <% @restaurants.each do |restaurant| %>
 
   <div class="restaurant">
-    <p>
-      <%= link_to restaurant.name, "restaurants/#{restaurant.id}" %>
-    </p>
-    <p>
-      <%= restaurant.address %>
-    </p>
-    <p>
-      <%= restaurant.phone_number %>
-    </p>
+    <div class="image">
+      <%= image_tag(restaurant.picture)%>
+    </div>
+    <div class="text-wrap">
+      <p><%= link_to restaurant.name, "restaurants/#{restaurant.id}" %></p>
+      <p><%= restaurant.address %></p>
+      <p><%= restaurant.phone_number %></p>
+    </div>
   </div>
 
 <% end %>
