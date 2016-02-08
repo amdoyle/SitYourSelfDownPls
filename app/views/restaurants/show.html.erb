@@ -3,28 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <title><%= @restaurant.name %></title>
-  <%= stylesheet_link_tag "restaurant_page.css" %></head>
+  <%= stylesheet_link_tag "restaurant_page.css" %>
+</head>
 <body>
-  <h1><%= @restaurant.name %></h1>
 
-  <% if !current_owner && !current_user %>
-    <p>Please <%= link_to "Log in", new_session_path %> or <%= link_to "Sign Up", new_user_path %>
-      to make reservations.</p>
-  <% end %>
+
+<h1><%= @restaurant.name %></h1>
+
+<% if !current_owner && !current_user %>
+  <p>Please <%= link_to "Log in", new_session_path %> or <%= link_to "Sign Up", new_user_path %>
+    to make reservations.</p>
+<% end %>
+
 <div class="info">
 
-  <p><%= image_tag(@restaurant.picture) %></p>
+  <div class="image"><%= image_tag(@restaurant.picture) %></div>
+
   <p><%= @restaurant.address %></p>
   <p><%= @restaurant.phone_number %></p>
   <p><%= @restaurant.description %></p>
   <p><%= @restaurant.convert_time(@restaurant.opening_time) %> - <%= @restaurant.convert_time(@restaurant.closing_time) %></p>
+  <% if @restaurant.category != nil %>
+    <p><%= @restaurant.category.name %></p>
+  <% else %>
+  <% end %>
 
-    <% if @restaurant.category != nil %>
-      <p><%= @restaurant.category.name %></p>
-    <% else %>
-    <% end %>
+  <% if current_owner %>
+    <p>Capacity: <%= @restaurant.capacity %></p>
+  <% else %>
+  <% end %>
 
-  <p><%= @restaurant.capacity %></p>
   <h3>Unavailable Timeslots In Next Week:</h3>
   <% if @unavailable_times %>
     <ul>
@@ -35,14 +43,18 @@
   <% else %>
     <p>All timeslots are available</p>
   <% end %>
-  <% if current_user %>
+
+<%= render "restaurants/price_range" %>
+
+<% if current_user %>
     <h3>Make Reservation:</h3>
 
     <%= render "reservation" %>
+
   <% end %>
 
 
-  <% if current_user %>
+<% if current_user %>
     <h3>Add a New Review:</h3>
 
     <%= render "form_review" %>
@@ -51,14 +63,11 @@
   <% end %>
 </div>
 
-  <% unless current_owner == @restaurant.owner_id %>
-    <p><%= link_to "Edit Your Restaurant Listing", edit_restaurant_path %></p>
-    <p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
-  <% else %>
-    <p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
-  <% end %>
-<% end %>
+
+
 
 
 </body>
 </html>
+Status API Training Shop Blog About Pricing
+© 2016 GitHub, Inc. Terms Privacy Security Contact Help
