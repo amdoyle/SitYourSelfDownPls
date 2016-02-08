@@ -5,10 +5,10 @@
   <title>Restaurants</title>
 </head>
 <body id="top">
-  <div class="image">
 
   <h1>Restaurant List</h1>
 
+<<<<<<< HEAD
 <div class="restaurant">
 
 <%= form_tag(restaurants_path, :method => "get", id: "search-form") do %>
@@ -30,16 +30,24 @@
 
 <% end %>
 
+=======
+<div class="search">
+  <%= form_tag(restaurants_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search" %>
+    <%= submit_tag "Search" %>
+  <% end %>
+>>>>>>> c59db67671a8e05bb8aba91fbe950ac97ebe844a
 </div>
 
-  <div class="restaurant">
+  <div class="restaurant-wrap">
     <% if params[:search] && @restaurants.empty? %>
       Nothing matched your search terms.
       <%= render "restaurant" %>
     <% else %>
        <%= render "restaurant" %>
     <% end %>
+  </div>
   <a href="#top">Back to top</a>
-</div>
+
 </body>
 </html>
