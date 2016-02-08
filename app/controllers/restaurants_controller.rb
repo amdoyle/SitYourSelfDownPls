@@ -7,7 +7,7 @@ class RestaurantsController < ApplicationController
     @categories = Category.all
 
     if params[:search]
-      @restaurants = Restaurant.search(params[:search])
+      @restaurants = Restaurant.search(params[:search], params[:price_range])
     else
       @restaurants = Restaurant.all
     end

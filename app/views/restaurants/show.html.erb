@@ -5,6 +5,7 @@
   <p>Please <%= link_to "Log in", new_session_path %> or <%= link_to "Sign Up", new_user_path %>
     to make reservations.</p>
 <% end %>
+
 <p><%= link_to @restaurant.url, @restaurant.url %></p>
 <p><%= @restaurant.address %></p>
 <p><%= @restaurant.phone_number %></p>
@@ -31,7 +32,8 @@
 <p>Please <%= link_to "Log In", new_session_path %> to make a new reservation.</p>
 <% end %>
 
-<%= render "current_user_comments" %>
+<%= render @restaurant.reviews %>
+
 <%= render "form_review" %>
 
 

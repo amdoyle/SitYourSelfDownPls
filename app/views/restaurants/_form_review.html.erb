@@ -1,10 +1,9 @@
-
 <% if current_user %>
   <h3>Add a New Review:</h3>
 
     <%= form_for ([@restaurant, @review]) do |f| %>
         <% if @review.errors.any? %>
-          <div id="error_explanation">
+          <div class="error_messages">
             <h2> <%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved: </h2>
             <ul>
               <% @review.errors.full_messages.each do |msg| %>
@@ -13,7 +12,6 @@
             </ul>
           </div>
         <% end %>
-
 
       <div class="field">
         <%= f.label :comment, "Review: " %>
@@ -36,7 +34,5 @@
       <div class="actions">
         <%= f.submit %>
       </div>
-    <% end %>
-  <% else %>
-    <p>Please <%= link_to "Log In", new_session_path %> to add a review.</p>
+  <% end %>
 <% end %>
