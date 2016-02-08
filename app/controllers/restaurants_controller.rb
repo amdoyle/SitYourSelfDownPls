@@ -37,6 +37,20 @@ class RestaurantsController < ApplicationController
       @review = @restaurant.reviews.build
     end
 
+    @reservations = @restaurant.reservations
+    start_time = Time.now.beginning_of_hour
+    end_time = start_time + 7.days
+
+    i_time = start_time
+    @unavailable_times = []
+    while i_time <= end_time
+      available_capacity = @restaurant.available_capacity_at_hour(i_time)
+      if available_capacity == 0
+        @unavailable_times << i_time
+      end
+      i_time += 1.hours
+    end
+
   end
 
   def edit
