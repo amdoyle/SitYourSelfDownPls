@@ -86,6 +86,13 @@ class Restaurant < ActiveRecord::Base
 
   end
 
+  def available_capacity_at_hour(time)
+    
+    time = time.to_time
+    available_capacity = capacity - reservations.where('time >= ? and time < ?', time.beginning_of_hour-5.hours, time.end_of_hour-5.hours).sum(:number)
+
+  end
+
   def authorize
     if current_owner
       @restaurant = Restaurant.find(params[:id])

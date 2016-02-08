@@ -26,6 +26,16 @@
     <% end %>
 
   <p><%= @restaurant.capacity %></p>
+  <h3>Unavailable Timeslots In Next Week:</h3>
+  <% if @unavailable_times %>
+    <ul>
+      <% @unavailable_times.each do | u_time | %>
+        <li><%= u_time %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>All timeslots are available</p>
+  <% end %>
   <% if current_user %>
     <h3>Make Reservation:</h3>
 
