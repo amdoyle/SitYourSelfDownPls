@@ -23,18 +23,18 @@
   <% else %>
   <% end %>
 
-<%= render "price_range" %>
+<%= render "restaurants/price_range" %>
 
 <% if current_user %>
 <h4>New Reservation</h4>
-<%= render "reservation" %>
+<%= render "restaurants/reservation" %>
 <% else %>
 <p>Please <%= link_to "Log In", new_session_path %> to make a new reservation.</p>
 <% end %>
 
 <%= render @restaurant.reviews %>
 
-<%= render "form_review" %>
+<%= render "restaurants/form_review" %>
 
 
 <% if current_owner %>
