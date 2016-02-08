@@ -18,7 +18,7 @@
   <p><%= @restaurant.address %></p>
   <p><%= @restaurant.phone_number %></p>
   <p><%= @restaurant.description %></p>
-  <p><%= @restaurant.opening_time %> - <%= @restaurant.closing_time %></p>
+  <p><%= @restaurant.convert_time(@restaurant.opening_time) %> - <%= @restaurant.convert_time(@restaurant.closing_time) %></p>
 
     <% if @restaurant.category != nil %>
       <p><%= @restaurant.category.name %></p>
@@ -26,21 +26,26 @@
     <% end %>
 
   <p><%= @restaurant.capacity %></p>
+  <% if current_user %>
+    <h3>Make Reservation:</h3>
 
-  <%= render "reservation" %>
+    <%= render "reservation" %>
 
-  <%= render "current_user_comments" %>
+    <%= render "current_user_comments" %>
+  <% end %>
 
 
   <% if current_user %>
+    <h3>Add a New Review:</h3>
+
     <%= render "form_review" %>
   <% else %>
-    <p>Only users can add reservations. Please <%= link_to "Log in", new_session_path %> to make a new reservation.</p>
+    <p>Only users can add reviews. Please <%= link_to "Log in", new_session_path %> to leave a review.</p>
   <% end %>
 </div>
 
 
-    <% if current_user %>
+    <!-- <% if current_user %>
      <h4>New Reservation</h4>
 
      <%= form_for([@restaurant, @reservation]) do |f| %>
@@ -59,9 +64,7 @@
       <% else %>
         <p>Please <%= link_to "Log In", new_session_path %> to make a new reservation.</p>
       <% end %>
-      <% end %>
-
-  <p><%= link_to "Back to Restaurant Listings", restaurants_path %></p>
+    <% end %> -->
 
   <% unless current_owner == @restaurant.owner_id %>
     <p><%= link_to "Edit Your Restaurant Listing", edit_restaurant_path %></p>
