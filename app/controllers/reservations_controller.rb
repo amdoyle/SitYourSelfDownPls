@@ -14,28 +14,37 @@ class ReservationsController < ApplicationController
 
   def update
     @reservation = Reservation.find(params[:id])
-    if @restaurant.available?(params[:reservation][:number], params[:reservation][:time], @reservation)
-      if @reservation.update_attributes(reservation_params)
-        redirect_to restaurant_path(@reservation.restaurant_id), notice: "Reservation has been updated! #{@reservation.time}"
+    if @restaurant.open?(params[:reservation][:time])
+      if @restaurant.available?(params[:reservation][:number], params[:reservation][:time], @reservation)
+        if @reservation.update_attributes(reservation_params)
+          redirect_to restaurant_path(@reservation.restaurant_id), notice: "Reservation has been updated! #{@reservation.time}"
+        else
+          redirect_to edit_restaurant_reservation_path(@restaurant, @reservation), notice: "Problem updating reservation"
+        end
       else
-        redirect_to edit_restaurant_reservation_path(@restaurant, @reservation), notice: "Problem updating reservation"
+        redirect_to edit_restaurant_reservation_path(@restaurant, @reservation), notice: "No space for that reservation then"
       end
     else
-      redirect_to edit_restaurant_reservation_path(@restaurant, @reservation), notice: "No space for that reservation then"
+      redirect_to edit_restaurant_reservation_path(@restaurant, @reservation), notice: "Sorry but the restaurant isn't open then."
     end
+
   end
 
   def create
-    if @restaurant.available?(params[:reservation][:number], params[:reservation][:time])
-      @reservation = @restaurant.reservations.build(reservation_params)
-      @reservation.user = current_user
-      if @reservation.save
-        redirect_to restaurant_path(@restaurant.id), notice: "Reservation has been created! #{@reservation.time}"
+    if @restaurant.open?(params[:reservation][:time])
+      if @restaurant.available?(params[:reservation][:number], params[:reservation][:time])
+        @reservation = @restaurant.reservations.build(reservation_params)
+        @reservation.user = current_user
+        if @reservation.save
+          redirect_to restaurant_path(@restaurant.id), notice: "Reservation has been created! #{@reservation.time}"
+        else
+          redirect_to reservations_path, notice: "Reservation failed to save to database."
+        end
       else
-        redirect_to reservations_path, notice: "Reservation failed to save to database."
+        redirect_to restaurant_path(@restaurant.id), notice: "Sorry but the restaurant doesn't have available capacity at that time."
       end
     else
-      redirect_to restaurant_path(@restaurant.id), notice: "Sorry but the restaurant doesn't have available capacity at that time."
+      redirect_to restaurant_path(@restaurant.id), notice: "Sorry but the restaurant is open at that time."
     end
   end
 

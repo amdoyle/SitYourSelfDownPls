@@ -16,13 +16,17 @@ class Restaurant < ActiveRecord::Base
 
     available_capacity = capacity - reservations.where('time >= ? and time < ?', time.beginning_of_hour-5.hours, time.end_of_hour-5.hours).sum(:number)
     if reservation_updating
-      if reservation_updating.time == time.beginning_of_hour-5.hours && reservation_updating.time < time.end_of_hour-5.hours
+      if reservation_updating.time >= time.beginning_of_hour-5.hours && reservation_updating.time < time.end_of_hour-5.hours
         available_capacity += reservation_updating.number
       end
     end
-    
+
     party_size > 0 && party_size <= available_capacity
 
+  end
+
+  def open?(time)
+    time.to_time.to_formatted_s(:time).to_i >= opening_time && time.to_time.to_formatted_s(:time).to_i < closing_time
   end
 
   def convert_time(time)
