@@ -1,4 +1,4 @@
-<h1>Sign Up</h1>
+<h1>Sign Up As User</h1>
 
   <%= form_for @user do |f| %>
     <% if @user.errors.any? %>
@@ -31,3 +31,6 @@
         <%= f.submit %>
       </div>
     <% end %>
+
+<p><a href = "/owners/new">Click here to sign up as owner.</a>
+  </p>

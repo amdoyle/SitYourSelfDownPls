@@ -33,6 +33,8 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.find(params[:id])
     @reservation = @restaurant.reservations.build
 
+    @reviews = @restaurant.reviews
+
     if current_user
       @review = @restaurant.reviews.build
     end
