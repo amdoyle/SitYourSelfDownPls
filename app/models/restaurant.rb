@@ -15,15 +15,81 @@ class Restaurant < ActiveRecord::Base
     time = time.to_time
 
     available_capacity = capacity - reservations.where('time >= ? and time < ?', time.beginning_of_hour-5.hours, time.end_of_hour-5.hours).sum(:number)
-
-    puts "\n\n DUDE: #{reservation_updating.time} >= #{time.beginning_of_hour}  && #{reservation_updating.time} < #{time.end_of_hour}"
-    if reservation_updating.time == time.beginning_of_hour-5.hours && reservation_updating.time < time.end_of_hour-5.hours
-      available_capacity += reservation_updating.number
-      puts "AC: #{available_capacity}"
-    else
-      puts "WHY AC: #{available_capacity}"
+    if reservation_updating
+      if reservation_updating.time >= time.beginning_of_hour-5.hours && reservation_updating.time < time.end_of_hour-5.hours
+        available_capacity += reservation_updating.number
+      end
     end
+
     party_size > 0 && party_size <= available_capacity
+
+  end
+
+  def open?(time)
+    time.to_time.to_formatted_s(:time).to_i >= opening_time && time.to_time.to_formatted_s(:time).to_i < closing_time
+  end
+
+  def convert_time(time)
+
+    case time
+    when 0
+      "12:00 AM"
+    when 1
+      "1:00 AM"
+    when 2
+      "2:00 AM"
+    when 3
+      "3:00 AM"
+    when 4
+      "4:00 AM"
+    when 5
+      "5:00 AM"
+    when 6
+      "6:00 AM"
+    when 7
+      "7:00 AM"
+    when 8
+      "8:00 AM"
+    when 9
+      "9:00 AM"
+    when 10
+      "10:00 AM"
+    when 11
+      "11:00 AM"
+    when 12
+      "12:00 PM"
+    when 13
+      "1:00 PM"
+    when 14
+      "2:00 PM"
+    when 15
+      "3:00 PM"
+    when 16
+      "4:00 PM"
+    when 17
+      "5:00 PM"
+    when 18
+      "6:00 PM"
+    when 19
+      "7:00 PM"
+    when 20
+      "8:00 PM"
+    when 21
+      "9:00 PM"
+    when 22
+      "10:00 PM"
+    when 23
+      "11:00 PM"
+    else
+      "Invalid time"
+    end
+
+  end
+
+  def available_capacity_at_hour(time)
+    
+    time = time.to_time
+    available_capacity = capacity - reservations.where('time >= ? and time < ?', time.beginning_of_hour-5.hours, time.end_of_hour-5.hours).sum(:number)
 
   end
 
