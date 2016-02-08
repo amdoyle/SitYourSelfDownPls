@@ -17,7 +17,7 @@ body {
   }
 
   .text-wrap {
-    background: #ccc;
+    background: none;
   }
 }
 
@@ -33,7 +33,10 @@ body {
 
   }
   input[type=submit] {
-    width: 50px
-
+    font-size: 25px;
+    padding: 5px;
+    border: 2px;
+    text-align: center;
+    background-color: #28FABE;
   }
 }
