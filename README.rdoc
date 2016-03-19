@@ -1,25 +1,25 @@
 == Sit Your Self Down Please
 
-##About:
+About:
 * Collabrative Rails clone of Open Table
 * Project currently contains minimal style styl
 
-##Collaborators: 
+Collaborators: 
 * Tanner Russell-Murray 
 * Mandeep Wraich
 * Lyna Nguyen
 
-##Versions: 
+Versions: 
 * Rails 4.2.5
 * Ruby 2.3.0
 
-##Gems:
+Gems:
 * Factory Girl - used for used for testing, but can be removed
 
-##Additional:
+Additional:
 * Project currently contains **very** minimal style
 * Tests were set-up, but are not currently funationing
 
-##Next Steps:
+Next Steps:
 * Finish Styling
 * Implement working tests
