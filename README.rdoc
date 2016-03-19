@@ -2,7 +2,7 @@
 
 ==== About:
 * Collabrative Rails clone of Open Table
-* Project currently contains minimal style styl
+* Project currently contains minimal styles
 
 ==== Collaborators: 
 * Tanner Russell-Murray 
@@ -15,6 +15,10 @@
 
 ==== Gems:
 * Factory Girl - used for used for testing, but can be removed
+
+=== Set-up:
+* Bundle install gems
+* Run migrations
 
 ==== Additional:
 * Project currently contains *very* minimal style
